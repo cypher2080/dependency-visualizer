@@ -2,7 +2,7 @@ import sys
 
 from src.config import load_config
 from src.errors import VisualizerError
-from src.graph import build_graph, find_cycles
+from src.graph import build_graph, find_cycles, load_order
 from src.local_repo import LocalRepository
 from src.pypi import PypiRepository
 
@@ -36,6 +36,14 @@ def run(config):
         print("  %s -> %s" % (name, ", ".join(deps) or "-"))
     for cycle in find_cycles(graph):
         print("Цикл: " + " -> ".join(cycle))
+    print_load_order(graph)
+
+
+def print_load_order(graph):
+    order, rest = load_order(graph)
+    print("Порядок загрузки: " + " ".join(order))
+    if rest:
+        print("Не загружены из-за цикла: " + " ".join(rest))
 
 
 if __name__ == "__main__":

@@ -30,3 +30,22 @@ def find_cycles(graph):
                 elif child not in path and child > start:
                     stack.append((child, path + [child]))
     return cycles
+
+
+def load_order(graph):
+    waiting = {name: len(set(deps)) for name, deps in graph.items()}
+    parents = {name: [] for name in graph}
+    for name, deps in graph.items():
+        for child in set(deps):
+            parents[child].append(name)
+    queue = deque(name for name, count in waiting.items() if count == 0)
+    order = []
+    while queue:
+        name = queue.popleft()
+        order.append(name)
+        for parent in parents[name]:
+            waiting[parent] -= 1
+            if waiting[parent] == 0:
+                queue.append(parent)
+    rest = [name for name in graph if name not in order]
+    return order, rest
