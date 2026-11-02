@@ -1,0 +1,3 @@
+package: requests
+test_mode: false
+max_depth: 3

@@ -83,6 +83,13 @@ run.bat
 run.bat configs\cycle.yaml
 ```
 
+Вторым аргументом можно задать режим: `params`, `deps`, `graph`, `order`,
+`d2` или `all` (по умолчанию):
+
+```sh
+./run.sh configs/flask.yaml order
+```
+
 Через Makefile:
 
 ```sh
@@ -91,6 +98,25 @@ make run CONFIG=configs/flask.yaml
 make test                         # тесты
 make demo                         # три тестовых графа
 ```
+
+## Скрипты этапов
+
+В папке `scripts` на каждую задачу этапа — отдельный скрипт:
+
+| Скрипт                    | Что показывает                                |
+|---------------------------|-----------------------------------------------|
+| `stage1_params.sh`        | вывод параметров в формате ключ-значение      |
+| `stage1_errors.sh`        | обработка ошибок всех параметров              |
+| `stage2_deps.sh`          | прямые зависимости requests с PyPI            |
+| `stage3_simple.sh`        | граф BFS на простом тестовом репозитории      |
+| `stage3_cycle.sh`         | граф с циклической зависимостью               |
+| `stage3_depth_exclude.sh` | ограничение глубины и фильтр по подстроке     |
+| `stage3_errors.sh`        | несуществующий пакет и файл репозитория       |
+| `stage4_order_test.sh`    | порядок загрузки на тестовых репозиториях     |
+| `stage4_order_pip.sh`     | порядок загрузки flask в сравнении с pip      |
+| `stage5_requests.sh`      | D2 и изображение графа requests               |
+| `stage5_flask.sh`         | D2 и изображение графа flask                  |
+| `stage5_httpx.sh`         | D2 и изображение графа httpx                  |
 
 ## Примеры
 
