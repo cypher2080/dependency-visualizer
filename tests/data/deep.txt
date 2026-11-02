@@ -1,0 +1,6 @@
+A: B X
+B: C XY
+C: D
+D: E
+E:
+X: E
