@@ -1,6 +1,7 @@
 import sys
 
 from src.config import load_config
+from src.d2 import render, to_d2
 from src.errors import VisualizerError
 from src.graph import build_graph, find_cycles, load_order
 from src.local_repo import LocalRepository
@@ -37,6 +38,12 @@ def run(config):
     for cycle in find_cycles(graph):
         print("Цикл: " + " -> ".join(cycle))
     print_load_order(graph)
+    text = to_d2(graph)
+    print("D2:")
+    print(text, end="")
+    image = render(text)
+    if image:
+        print("Изображение: " + image)
 
 
 def print_load_order(graph):

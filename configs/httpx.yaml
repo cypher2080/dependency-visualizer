@@ -1,0 +1,5 @@
+package: httpx
+repository: https://pypi.org/pypi
+test_mode: false
+max_depth: 3
+exclude: ""
