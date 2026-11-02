@@ -68,10 +68,28 @@ E:
 Нужен Python 3.9+. Для изображения — утилита `d2` (`brew install d2`),
 без неё выводится только текст D2.
 
+Linux / macOS:
+
 ```sh
 ./run.sh                      # config.yaml
 ./run.sh configs/cycle.yaml   # другой файл настроек
 python3 -m unittest -v        # тесты
+```
+
+Windows:
+
+```bat
+run.bat
+run.bat configs\cycle.yaml
+```
+
+Через Makefile:
+
+```sh
+make run                          # config.yaml
+make run CONFIG=configs/flask.yaml
+make test                         # тесты
+make demo                         # три тестовых графа
 ```
 
 ## Примеры
